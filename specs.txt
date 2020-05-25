@@ -1,0 +1,9 @@
+5/25/20 
+Specifications:
+Runable script that will sort all photos in a given directory into its own folders specified by year.
+
+Flow:
+Run the script
+Get the first and last item in the directory.
+	Grab the date of the first item, and set that as the 	first folder. Build folders until the last item in the 	directory (which will usually be the latest year).
+Navigate into each file. Then move the path of the file to its corresponding folder.  
