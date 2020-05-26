@@ -1,10 +1,21 @@
 import os, os.path
 import time
+import sys
 import shutil
-print("Generating folders...")
 yearList = []
 cwd = os.getcwd()
-os.chdir("test files")
+while True:
+    toSort = input("Please input the folder to sort: ")
+    try:
+        os.chdir(f"{toSort}")
+        break
+    except FileNotFoundError:
+        userChoice = input("Folder to sort does not exist. Press enter to retype. If you want to exit, please type 'exit'.")
+        if "exit" in userChoice:
+            sys.exit("User closed the program.")
+        else:
+            continue
+print("Generating folders...")
 listItems = [name for name in os.listdir('.') if os.path.isfile(name)]
 for check in listItems:
     year = time.ctime(os.path.getmtime(check))[20:]
@@ -12,16 +23,14 @@ for check in listItems:
     if year in yearList:
         continue
     yearList.append(year)
-os.chdir(cwd)
 for year in yearList:
     try:
         os.mkdir(f"{year}")
     except:
         print("Folder already exists")
-os.chdir("test files")
 for item in listItems:
     year = time.ctime(os.path.getmtime(item))[20:]
     print(f"Moving {item} to folder {year}")
-    shutil.move(os.path.realpath(item),f'../{year}/{item}')
+    shutil.move(os.path.realpath(item),f'{year}/{item}')
 
 
